@@ -1,12 +1,26 @@
 import React from 'react';
-import Home from './pages/Home'
+import { ThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignIn from './pages/SignIn';
+import Home from './pages/Home';
+import theme from "./theme";
 
 function App() {
   return (
-    <Home>
-      {/* pegando do index.js da pasta home */}
-      Conecta dev
-    </Home>
+
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* elemento padrao <Home />  */}
+          <Route path="/sign-in" element={<SignIn />} />
+          {/* elemento para SPA single page apllication <SignIn /> */}
+          <Route path="/*" element={<h1>Not Found 404!</h1>} />
+          {/* para paginas nao encontradas */}
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+
   );
 }
 
